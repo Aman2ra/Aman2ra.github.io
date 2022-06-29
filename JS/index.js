@@ -48,6 +48,7 @@ $(document).ready(function () {
   $.ajax({
     url: imgDir,
     success: function (data) {
+      console.log(data);
       $(data)
         .find("a")
         .attr("href", function (i, val) {
