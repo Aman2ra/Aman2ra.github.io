@@ -1,0 +1,109 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: var(--ff-primary);
+}
+
+/* Custom Default Properties */
+
+:root {
+  --ff-primary: "Roboto", sans-serif;
+  --ff-secondary: "Kdam Thmor Pro", sans-serif;
+  --ff-neon: "Neonderthaw", cursive;
+
+  --fw-reg: 400;
+  --fw-bold: 900;
+
+  --clr-dark: rgb(31, 31, 31);
+  --clr-light: #fff;
+  --clr-accent: rgb(197, 109, 197);
+  --clr-neon-a: rgb(248, 138, 211);
+
+  --clr-bg: var(--clr-dark);
+  --clr-fg: var(--clr-light);
+
+  --fs-h1: 3rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+
+  --personal-links-transition: padding-top 500ms cubic-bezier(0.5, 0, 0.5, 1),
+    padding-bottom 500ms cubic-bezier(0.5, 0, 0.5, 1),
+    border 500ms cubic-bezier(0.5, 0, 0.5, 1),
+    font-size 500ms cubic-bezier(0.5, 0, 0.5, 1);
+
+  --pop-out-height: 50vh;
+}
+
+:focus-visible {
+  outline: solid 3px var(--clr-accent);
+}
+
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: var(--clr-bg);
+  color: var(--clr-light);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-fg);
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Typography */
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+a {
+  background-color: var(--clr-bg);
+}
+
+button {
+  font-size: var(--fs-h2);
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@media (min-width: 800px) {
+  :root {
+    --fs-h1: 2.5rem;
+    --fs-h2: 2rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 1rem;
+  }
+}
