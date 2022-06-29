@@ -5,7 +5,7 @@ projectsToggle.addEventListener("click", function () {
 });
 
 const carouselTrack = document.getElementById("carousel-track");
-let imgDir = "../Assets/Images/Highlighted Projects/";
+let imgDir = "./Assets/Images/Highlighted Projects/";
 $(document).ready(function () {
   $.ajax({
     url: imgDir,
