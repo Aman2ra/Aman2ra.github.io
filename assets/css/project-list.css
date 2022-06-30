@@ -1,0 +1,542 @@
+:root {
+  --project-height: 250px;
+  --project-max-height: 200px;
+  --bo-project: 5px;
+  --bo-img: 2px;
+  --bo-info: 2px;
+  --perp-v: 4vw;
+  --perp-ry: 2.5deg;
+  --perp-rz: -2deg;
+  --perp-t: 12vw;
+}
+
+.page-header {
+  position: fixed;
+  width: 100%;
+  z-index: 5000;
+  height: 75px;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  min-height: 100vh;
+}
+
+.project,
+.project-name,
+.project-img-container,
+.project-img,
+.project-info-container,
+.project-description,
+.read-more,
+.even-project,
+.even-img-container,
+.even-img,
+.even-info-container,
+.even-name,
+.even-description,
+.even-read-more,
+.odd-project,
+.odd-img-container,
+.odd-img,
+.odd-info-container,
+.odd-name,
+.odd-description,
+.odd-read-more {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Typography */
+/* .project-name {
+  font-size: 3rem;
+}
+
+.project-description {
+  font-size: 2rem;
+}
+
+.read-more {
+  font-size: 1rem;
+} */
+
+/* Styling */
+
+#projects-main-page {
+  background: transparent;
+  top: 75px;
+  position: relative;
+}
+
+.page-container {
+  border: solid 10px var(--clr-accent);
+  padding-bottom: 100px;
+  margin: 0px 150px 0px 150px;
+}
+
+#main-page-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+}
+
+.projects-container {
+  background: transparent;
+}
+
+.projects-list {
+  background: transparent;
+  list-style-type: none;
+  padding: 20px;
+}
+
+.project {
+  position: relative;
+  margin: 15px auto;
+  max-width: 1000px;
+  border: solid var(--bo-project) var(--clr-accent);
+  min-height: var(--project-height);
+}
+
+.project-img-container {
+  /* border: solid var(--bo-img) red; */
+  width: calc(1600 / 900 * var(--project-max-height));
+  height: 100%;
+}
+
+.project-img {
+  object-fit: contain;
+  margin: calc((var(--project-height) - var(--project-max-height) - 2*var(--bo-project))/2) auto;
+  max-width: calc(1600/900 * var(--project-max-height));
+  max-height: 200px;
+}
+
+.project-info-container {
+  padding: 5px 10px;
+  /* border: solid var(--bo-info) blue; */
+  height: 100%;
+}
+
+.project-name {
+  font-weight: bold;
+  margin: 5px 0px;
+  text-shadow: 0 0 1px #101010;
+}
+
+.project-description {
+  margin: 10px 0px;
+  text-shadow: 0 0 1px #101010;
+}
+
+.read-more {
+  font-size: 1.25rem;
+  font-style: italic;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 0 0 1px #101010;
+}
+
+.project-progress {
+  padding: 0;
+  text-shadow: 0 0 1px #101010;
+}
+
+.complete {
+  color: green;
+}
+
+.theory {
+  color: gray;
+}
+
+.wip {
+  color: yellow;
+}
+
+.even-project {
+  transform: perspective(var(--perp-v)) rotateY(var(--perp-ry)) rotateZ(var(--perp-rz)) translateX(var(--perp-t));
+}
+
+.odd-project {
+  transform: perspective(var(--perp-v)) rotateY(calc(-1 * var(--perp-ry))) rotateZ(calc(-1 * var(--perp-rz))) translateX(calc(-1 * var(--perp-t)));
+}
+
+.even-img-container {
+  position: absolute;
+  left: 0;
+}
+
+.odd-img-container {
+  position: absolute;
+  right: 0;
+}
+
+.even-info-container {
+  position: absolute;
+  margin-left: 10px;
+  left: calc(1600 / 900 *var(--project-max-height));
+  right: 0;
+  text-align: left;
+}
+
+.odd-info-container {
+  position: absolute;
+  margin-right: 10px;
+  left: 0;
+  right: calc(1600 / 900 * var(--project-max-height));
+  text-align: right;
+}
+
+.even-name {
+  text-align: left;
+}
+
+.odd-name {
+  text-align: right;
+}
+
+.even-description {
+  text-align: left;
+}
+
+.odd-description {
+  text-align: right;
+}
+
+.even-progress {
+  text-align: left;
+}
+
+.odd-progress {
+  text-align: right;
+}
+
+.even-read-more {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.odd-read-more {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.project {
+  transition: transform 250ms linear;
+}
+
+.project:hover {
+  z-index: 1;
+  transform: perspective(none);
+}
+
+.sign-left,
+.sign-right {
+  background: transparent;
+  position: absolute;
+  top: 50%;
+}
+
+.sign-left {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sign-right {
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+/* Glowing button */
+.sign-neon {
+  font-family: var(--ff-secondary);
+  background: black;
+  text-align: center;
+  word-wrap: break-word;
+  width: 125px;
+  margin: 0;
+  padding: 40px calc((100% - var(--fs-h1)) / 2);
+
+  color: var(--clr-neon-a);
+  border: solid 0.125em var(--clr-neon-a);
+  border-radius: 35px;
+
+  text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.15),
+    0 0 0.25em var(--clr-neon-a);
+
+  box-shadow: inset 0 0 0.5em 0 var(--clr-neon-a), 0 0 0.5em 0 var(--clr-neon-a);
+}
+
+.sign-neon::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 1em 0.5em var(--clr-neon-a);
+  opacity: 0;
+  transition: opacity 1000ms linear;
+}
+
+.sign-neon:hover::after {
+  opacity: 100%;
+}
+
+
+/* Elevator Styles */
+.elevator {
+  background: transparent;
+}
+
+.elevator-panel {
+  position: fixed;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  background: black;
+  background: url(../assets/images/General/Elevator\ Panel\ Texture.png) repeat fixed center;
+}
+
+.left-panel {
+  left: 0;
+}
+
+.right-panel {
+  right: 0;
+}
+
+.city-background {
+  position: fixed;
+  z-index: -1;
+}
+
+.glass-panel {
+  background: rgba(126, 133, 148, 0.40);
+}
+
+.counter-panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(126, 133, 148, 0.30);
+}
+
+.elevator-floor {
+  width: 160px;
+  border: solid 5px var(--clr-accent);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.digit {
+  padding: 1px;
+}
+
+.elevator .logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 100px;
+  width: 80%;
+  background: transparent;
+}
+
+@media screen and (max-width: 3832px) {
+  :root {
+    --perp-t: 0vw;
+  }
+}
+
+@media screen and (max-width: 2874px) {
+  :root {
+    --perp-t: 2vw;
+  }
+}
+
+@media screen and (max-width: 1916px) {
+  :root {
+    --perp-t: 6vw;
+  }
+}
+
+@media screen and (max-width: 1019px) {
+  :root {
+    --perp-t: 12vw;
+  }
+
+  .project,
+  .project-name,
+  .project-img-container,
+  .project-img,
+  .project-info-container,
+  .project-description,
+  .read-more,
+  .even-project,
+  .even-img-container,
+  .even-img,
+  .even-info-container,
+  .even-name,
+  .even-description,
+  .even-read-more,
+  .odd-project,
+  .odd-img-container,
+  .odd-img,
+  .odd-info-container,
+  .odd-name,
+  .odd-description,
+  .odd-read-more {
+    top: initial;
+    bottom: initial;
+    left: initial;
+    right: initial;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .project {
+    position: relative;
+    margin: 30px 0;
+    border: solid var(--bo-project) black;
+    width: 100%;
+    height: initial;
+  }
+
+  .project-img-container {
+    position: relative;
+    background: transparent;
+    /* border: solid var(--bo-img) red; */
+    width: 100%;
+    max-height: 100%;
+  }
+
+  .project-img {
+    object-fit: contain;
+    max-height: var(--project-height);
+    max-width: 100%;
+  }
+
+  .even-img {
+    margin-left: 0;
+    margin-right: auto;
+    transition: transform 250ms linear, margin 250ms linear;
+  }
+
+  .odd-img {
+    margin-left: auto;
+    margin-right: 0;
+    transition: transform 250ms linear, margin 250ms linear;
+  }
+
+  .project-info-container {
+    position: relative;
+    /* border: solid var(--bo-info) blue; */
+    margin-top: 10px;
+  }
+
+  .project-name,
+  .project-description,
+  .read-more,
+  .project-progress {
+    margin: 10px 20px;
+  }
+
+  .project-name {
+    font-weight: bold;
+  }
+
+  .read-more {
+    position: relative;
+    font-size: 1.25rem;
+    font-style: italic;
+  }
+
+  .even-info-container,
+  .even-name,
+  .even-description,
+  .even-progress {
+    text-align: left;
+  }
+
+  .odd-info-container,
+  .odd-name,
+  .odd-description,
+  .odd-progress {
+    text-align: right;
+  }
+
+  :root {
+    --perp-v: 4vw;
+    --perp-ry: 3deg;
+    --perp-rz: -4deg;
+    --perp-t: 10vw;
+    --perp-s: 110%;
+  }
+
+  .even-project {
+    transform: perspective(var(--perp-v)) rotateY(var(--perp-ry)) rotateZ(var(--perp-rz)) translateX(var(--perp-t)) scaleX(var(--perp-s));
+  }
+
+  .odd-project {
+    transform: perspective(var(--perp-v)) rotateY(calc(-1 * var(--perp-ry))) rotateZ(calc(-1 * var(--perp-rz))) translateX(calc(-1 * var(--perp-t))) scaleX(var(--perp-s));
+  }
+
+  .project {
+    transition: transform 250ms linear;
+  }
+
+  .project:hover {
+    z-index: 1;
+    transform: perspective(none);
+  }
+
+  .project:hover>.even-img-container>.even-img {
+    margin-left: 50%;
+    margin-right: auto;
+    transform: translateX(-50%);
+    transition: transform 250ms linear, margin 250ms linear;
+  }
+
+  .project:hover>.odd-img-container>.odd-img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    transition: transform 250ms linear, margin 250ms linear;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .page-container {
+    margin: 0px 100px;
+  }
+
+  .sign-neon {
+    width: 100px;
+    padding: 40px calc((100% - var(--fs-h1)) / 2);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .sign-neon {
+    width: 100px;
+    padding: 40px calc((100% - var(--fs-h1) + 8px) / 2);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .page-container {
+    margin: 0px 50px;
+  }
+
+  .sign-neon {
+    width: 50px;
+    padding: 40px calc((100% - var(--fs-h1) + 8px) / 2);
+  }
+}
