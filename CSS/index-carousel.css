@@ -1,5 +1,5 @@
 /* Carousel Unit */
-#projects-carousel {
+.projects-carousel {
   padding: 0;
   position: absolute;
   transform: translateX(-50%) translateY(-100%);
@@ -15,24 +15,17 @@
   height: 20vh;
   width: calc(1600 / 900 * 20vh);
   z-index: 1;
-  transition: height 1000ms linear, width 1000ms linear;
+  transition: transform 500ms ease-in-out, height 500ms ease-in-out, width 500ms ease-in-out, left 500ms ease-in-out, bottom 500ms ease-in-out;
 }
 
-@media (max-width: 800px) {
-  #projects-carousel {
-    height: 20vh;
-    width: calc(1600 / 900 * 20vh);
-  }
-}
-
-#names-track-container {
+.names-track-container {
   overflow: hidden;
   border-width: 5px;
   box-shadow: inset 0 0 1em 0 var(--clr-neon-a), 0 0 1em 0.5em var(--clr-neon-a);
   border-radius: 0;
 }
 
-#names-track {
+.names-track {
   background: transparent;
   height: var(--fs-h3);
   padding: 0;
@@ -47,18 +40,17 @@
   width: 100%;
   opacity: 0;
   transition: opacity 250ms ease-in-out;
-  transition-delay: 250ms;
 }
 
 /* Carousel Track Unit */
-#carousel-track-container {
+.carousel-track-container {
   background-color: var(--clr-bg);
   height: 100%;
   position: relative;
   overflow: hidden;
 }
 
-#carousel-track {
+.carousel-track {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -74,12 +66,10 @@
   width: 100%;
   opacity: 0;
   transition: opacity 250ms ease-in-out;
-  transition-delay: 250ms;
 }
 
 .current-slide {
   opacity: 1;
-  transition-delay: 0ms;
 }
 
 .carousel-image {
@@ -97,13 +87,16 @@
   border: 0;
   cursor: pointer;
   font-size: 5em;
+  z-index: 5;
+  transition: transform 500ms ease-in-out, left 500ms ease-in-out, bottom 500ms ease-in-out,
+    top 500ms ease-in-out, right 500ms ease-in-out;
 }
 
-#carousel-left {
+.carousel-left {
   left: -60px;
 }
 
-#carousel-right {
+.carousel-right {
   right: -60px;
 }
 
@@ -135,9 +128,79 @@
   display: none;
 }
 
+.expand-carousel {
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: transparent;
+  z-index: 10;
+}
+
+.carousel-background {
+  position: fixed;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  transition: width 500ms ease-in-out, height 500ms ease-in-out;
+}
+
+.carousel-background-active {
+  width: 150vw;
+  height: 150vh;
+}
+
+.big {
+  position: fixed;
+  max-width: 100vw;
+  max-height: calc(900/1600 * 100vw);
+  margin: 0;
+  padding: 0;
+  bottom: calc(100vh - 100%);
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+@media screen and (orientation: portrait) {
+  .big {
+    width: 90vw;
+    height: calc(900/1600 * 90vw);
+  }
+
+  .big>.carousel-button {
+    position: fixed;
+    top: 115%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 5em;
+  }
+
+  .big>.carousel-left {
+    left: 50%;
+    transform: translateX(-150%);
+  }
+
+  .big>.carousel-right {
+    right: 50%;
+    transform: translateX(150%);
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .big {
+    width: 80vw;
+    height: calc(900/1600 * 80vw);
+  }
+}
+
 @media screen and (max-width: 650px) {
 
-  /* Carousel Buttons */
   .carousel-button {
     position: absolute;
     top: 115%;
@@ -148,13 +211,36 @@
     font-size: 5em;
   }
 
-  #carousel-left {
+  .carousel-left {
     left: 50%;
     transform: translateX(-150%);
   }
 
-  #carousel-right {
+  .carousel-right {
     right: 50%;
     transform: translateX(150%);
+  }
+}
+
+@media screen and (max-height: 860px) {
+
+  .projects-carousel {
+    width: 500px;
+    height: calc(900 / 1600 * 500px);
+    transform: none;
+    margin: 0;
+    padding: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    transition: transform 500ms ease-in-out, height 500ms ease-in-out, width 500ms ease-in-out, left 500ms ease-in-out, top 500ms ease-in-out;
+  }
+
+  .big {
+    position: fixed;
+    width: 80vw;
+    height: calc(900/1600 * 80vw);
+    max-width: 100vw;
+    max-height: calc(900/1600 * 100vw);
   }
 }

@@ -6,6 +6,8 @@ let slides_track;
 let next_btn;
 let prev_btn;
 let nav_dots;
+let expand_button;
+let current_carousel;
 let initialized = false;
 
 const createCarousel = function (carousel) {
@@ -149,14 +151,23 @@ const createCarousel = function (carousel) {
     updateNames(names_track, currentName, targetName);
     updateDots(currentDot, targetDot);
   });
+
+  expand_button.addEventListener("click", (e) => {
+    current_carousel.classList.toggle("big");
+    current_carousel
+      .querySelector(".carousel-background")
+      .classList.toggle("carousel-background-active");
+  });
 };
 
 const refreshCarousel = function (carousel) {
-  names_track = carousel.querySelector("#names-track");
-  slides_track = carousel.querySelector("#carousel-track");
-  next_btn = carousel.querySelector("#carousel-right");
-  prev_btn = carousel.querySelector("#carousel-left");
+  current_carousel = carousel;
+  names_track = carousel.querySelector(".names-track");
+  slides_track = carousel.querySelector(".carousel-track");
+  next_btn = carousel.querySelector(".carousel-right");
+  prev_btn = carousel.querySelector(".carousel-left");
   nav_dots = carousel.querySelector(".carousel-nav");
+  expand_button = carousel.querySelector(".expand-carousel");
   createCarousel(carousel);
   let transition = slides_track.style.transition;
   names_track.style.transition = "none";

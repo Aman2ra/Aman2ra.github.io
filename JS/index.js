@@ -4,7 +4,7 @@ projectsToggle.addEventListener("click", function () {
   document.body.classList.toggle("projects-slide-open");
 });
 
-const carouselTrack = document.getElementById("carousel-track");
+const carouselTrack = document.querySelector(".carousel-track");
 let imgDir = "./Assets/Images/Highlighted Projects/";
 console.log(imgDir);
 $(document).ready(function () {
@@ -25,12 +25,12 @@ $(document).ready(function () {
                 break;
               }
             }
-            $("#names-track").append(
+            $(".names-track").append(
               '<li class="slide-name"><h3>' +
                 val.slice(start, end).replace("%20", " ") +
                 "</h3></li>"
             );
-            $("#carousel-track").append(
+            $(".carousel-track").append(
               ' <li class="carousel-slide current-slide"><img class="carousel-image" src="' +
                 val +
                 '" alt=""/></li>'
@@ -40,7 +40,7 @@ $(document).ready(function () {
             );
           }
         });
-      refreshCarousel(document.getElementById("projects-carousel"));
+      refreshCarousel(document.querySelector(".projects-carousel"));
     },
   });
   imgDir = "../Assets/Images/Highlighted Projects/";
@@ -63,12 +63,12 @@ $(document).ready(function () {
                 break;
               }
             }
-            $("#names-track").append(
+            $(".names-track").append(
               '<li class="slide-name"><h3>' +
                 val.slice(start, end).replace("%20", " ") +
                 "</h3></li>"
             );
-            $("#carousel-track").append(
+            $(".carousel-track").append(
               ' <li class="carousel-slide current-slide"><img class="carousel-image" src="' +
                 val +
                 '" alt=""/></li>'
@@ -78,7 +78,7 @@ $(document).ready(function () {
             );
           }
         });
-      refreshCarousel(document.getElementById("projects-carousel"));
+      refreshCarousel(document.querySelector(".projects-carousel"));
     },
   });
 });

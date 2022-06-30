@@ -76,21 +76,23 @@
   </div>
   <!-- Carousel Unit -->
   <!-- Carousel Popout Container -->
-  <nav id="popout-unit">
+  <nav class="popout-unit">
     <!-- Carousel -->
-    <div id="projects-carousel">
-      <button id="carousel-left" class="carousel-button">&lt</button>
-      <div id="carousel-track-container">
-        <ul id="carousel-track"></ul>
+    <div class="projects-carousel">
+      <div class="carousel-background"></div>
+      <button class="carousel-button carousel-left">&lt</button>
+      <div class="carousel-track-container">
+        <button class="expand-carousel"></button>
+        <ul class="carousel-track"></ul>
       </div>
-      <div id="names-track-container" class="neon">
-        <ul id="names-track"></ul>
+      <div class="names-track-container neon">
+        <ul class="names-track"></ul>
       </div>
-      <button id="carousel-right" class="carousel-button">&gt</button>
-
+      <button class="carousel-button carousel-right">&gt</button>
       <div class="carousel-nav"></div>
     </div>
     <!-- All Projects Button -->
+    <!-- <a id="all-projects-btn" class="neon" href="../HTML/projects.html">All Projects</a> -->
     <a id="all-projects-btn" class="neon" href="../HTML/projects.html">All Projects</a>
   </nav>
   <script type="module" src="../JS/index.js"></script>

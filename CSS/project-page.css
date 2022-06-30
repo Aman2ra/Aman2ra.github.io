@@ -1,6 +1,6 @@
 #detail-popouts {
   background: rgba(0, 0, 0, 0);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .details-background {
@@ -10,7 +10,6 @@
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0);
-
   transition: background 1000ms ease-in-out;
 }
 
@@ -45,6 +44,7 @@
 .odd-details {
   transform: translateX(-100vw);
 }
+
 .even-details {
   transform: translateX(100vw);
 }
@@ -74,6 +74,7 @@
 .even-details-close {
   transform: translateX(-100vw);
 }
+
 .odd-details-close {
   transform: translateX(100vw);
 }

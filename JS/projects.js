@@ -77,7 +77,7 @@ let read_more = function (project) {
     .querySelector(".project-details");
 
   loadCarouselImages(
-    detailsTemplateCopy.querySelector("#projects-carousel"),
+    detailsTemplateCopy.querySelector(".projects-carousel"),
     imagesFolder + projects[project]["project-img-folder"]
   );
   detailsTemplateCopy.querySelector("#page-title").textContent =
@@ -248,12 +248,12 @@ const loadCarouselImages = function (carousel, path) {
                   break;
                 }
               }
-              $(carousel.querySelector("#names-track")).append(
+              $(carousel.querySelector(".names-track")).append(
                 '<li class="slide-name"><h3>' +
                   val.slice(start, end).replace("%20", " ") +
                   "</h3></li>"
               );
-              $(carousel.querySelector("#carousel-track")).append(
+              $(carousel.querySelector(".carousel-track")).append(
                 ' <li class="carousel-slide current-slide"><img class="carousel-image" src="' +
                   val +
                   '" alt=""/></li>'
