@@ -1,4 +1,4 @@
-let imagesFolder = "../Assets/Images/Projects/";
+let imagesFolder = "../assets/images/Projects/";
 const projects = [
   {
     "project-name": "Rubiks Cube Solver",
@@ -299,7 +299,7 @@ const getAbsoluteHeight = function (el) {
 };
 
 const update_elevator = function (num) {
-  const font_path = "../Assets/Images/General/Font/";
+  const font_path = "../assets/images/General/Font/";
   const counter_digits = document.querySelectorAll(".digit");
   let digits = num.toString().split("");
   for (let i = 0; i < digits.length && i < counter_digits.length; i++) {

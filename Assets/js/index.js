@@ -5,7 +5,7 @@ projectsToggle.addEventListener("click", function () {
 });
 
 const carouselTrack = document.querySelector(".carousel-track");
-let imgDir = "./Assets/Images/Highlighted Projects/";
+let imgDir = "./assets/images/Highlighted Projects/";
 console.log(imgDir);
 $(document).ready(function () {
   $.ajax({
@@ -43,7 +43,7 @@ $(document).ready(function () {
       refreshCarousel(document.querySelector(".projects-carousel"));
     },
   });
-  imgDir = "../Assets/Images/Highlighted Projects/";
+  imgDir = "../assets/images/Highlighted Projects/";
   console.log(imgDir);
   $.ajax({
     url: imgDir,

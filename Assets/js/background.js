@@ -61,9 +61,9 @@ const size = {
 const fog = new THREE.Fog("#000000", 1, 2.5);
 scene.fog = fog;
 
-const TEXTURE_PATH = "../Assets/Textures/gridTexture2.png";
-const DISPLACEMENT_PATH = "../Assets/Textures/heightTexture2.png";
-const METAL_PATH = "../Assets/Textures/metalTexture2.png";
+const TEXTURE_PATH = "../assets/images/textures/gridTexture2.png";
+const DISPLACEMENT_PATH = "../assets/images/textures/heightTexture2.png";
+const METAL_PATH = "../assets/images/textures/metalTexture2.png";
 
 const textureLoader = new THREE.TextureLoader();
 const gridTexture = textureLoader.load(TEXTURE_PATH);
@@ -98,9 +98,9 @@ scene.add(gridPlane2);
 
 calcScale();
 
-const SUN_TEXTURE_PATH = "../Assets/Textures/sunTexture.png";
-const SUN_METAL_PATH = "../Assets/Textures/sunMetalTexture.png";
-const SUN_ROUGHNESS_PATH = "../Assets/Textures/sunRoughnessTexture1.png";
+const SUN_TEXTURE_PATH = "../assets/images/textures/sunTexture.png";
+const SUN_METAL_PATH = "../assets/images/textures/sunMetalTexture.png";
+const SUN_ROUGHNESS_PATH = "../assets/images/textures/sunRoughnessTexture1.png";
 
 const sunGridTexture = textureLoader.load(SUN_TEXTURE_PATH);
 const sunMetalTexture = textureLoader.load(SUN_METAL_PATH);

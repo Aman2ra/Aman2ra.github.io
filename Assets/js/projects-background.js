@@ -63,9 +63,9 @@ const size = {
 const fog = new THREE.Fog("#000000", 1, 2.5);
 scene.fog = fog;
 
-const TEXTURE_PATH = "../Assets/Textures/longGridTexture.png";
-const DISPLACEMENT_PATH = "../Assets/Textures/longHeightTexture.png";
-const METAL_PATH = "../Assets/Textures/longMetalTexture.png";
+const TEXTURE_PATH = "../assets/images/textures/longGridTexture.png";
+const DISPLACEMENT_PATH = "../assets/images/textures/longHeightTexture.png";
+const METAL_PATH = "../assets/images/textures/longMetalTexture.png";
 
 const textureLoader = new THREE.TextureLoader();
 const gridTexture = textureLoader.load(TEXTURE_PATH);
