@@ -50,8 +50,12 @@ $(document).ready(function () {
         });
       refreshCarousel(document.querySelector(".projects-carousel"));
     },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      alert("Status: " + textStatus);
+      alert("Error: " + errorThrown);
+    },
   });
-  let imgDir = "../assets/images/General";
+  imgDir = "../assets/images/General";
   $.ajax({
     url: imgDir,
     success: function (data) {
@@ -86,6 +90,10 @@ $(document).ready(function () {
           }
         });
       refreshCarousel(document.querySelector(".projects-carousel"));
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      alert("Status: " + textStatus);
+      alert("Error: " + errorThrown);
     },
   });
 });
