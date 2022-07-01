@@ -1,11 +1,9 @@
-// lookup Mesh.emmisiveMap
 import * as THREE from "three";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
-import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
-import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
-import { Mesh } from "three";
+import { RenderPass } from "RenderPass";
+import { EffectComposer } from "EffectComposer";
+import { GammaCorrectionShader } from "GammaCorrectionShader";
+import { ShaderPass } from "ShaderPass";
+import { RGBShiftShader } from "RGBShiftShader";
 
 let guiValues;
 const mouse = new THREE.Vector2();
@@ -63,16 +61,16 @@ const size = {
 const fog = new THREE.Fog("#000000", 1, 2.5);
 scene.fog = fog;
 
-const TEXTURE_PATH = "../assets/images/textures/longGridTexture.png";
-const DISPLACEMENT_PATH = "../assets/images/textures/longHeightTexture.png";
-const METAL_PATH = "../assets/images/textures/longMetalTexture.png";
+const TEXTURE_PATH = "../assets/textures/gridTexture2.png";
+const DISPLACEMENT_PATH = "../assets/textures/heightTexture2.png";
+const METAL_PATH = "../assets/textures/metalTexture2.png";
 
 const textureLoader = new THREE.TextureLoader();
 const gridTexture = textureLoader.load(TEXTURE_PATH);
 const gridTerrainTexture = textureLoader.load(DISPLACEMENT_PATH);
 const gridMetalTexture = textureLoader.load(METAL_PATH);
 
-const gridGeometry = new THREE.PlaneGeometry(1, 2, 11, 35);
+const gridGeometry = new THREE.PlaneGeometry(1, 2, 35, 35);
 const gridMaterial = new THREE.MeshStandardMaterial({
   map: gridTexture,
   displacementMap: gridTerrainTexture,
@@ -84,45 +82,44 @@ const gridMaterial = new THREE.MeshStandardMaterial({
 
 // GRID TEXTURE vs GRID OBJECT
 
-const gridPlane1a = new THREE.Mesh(gridGeometry, gridMaterial);
+const gridPlane = new THREE.Mesh(gridGeometry, gridMaterial);
 
-gridPlane1a.rotation.x = -Math.PI * 0.5;
-gridPlane1a.position.x = 0;
-gridPlane1a.position.y = 0.0;
-gridPlane1a.position.z = 0.15;
+gridPlane.rotation.x = -Math.PI * 0.5;
+gridPlane.position.y = 0.0;
+gridPlane.position.z = 0.15;
 
-scene.add(gridPlane1a);
+const gridPlane2 = new THREE.Mesh(gridGeometry, gridMaterial);
 
-const gridPlane1b = new THREE.Mesh(gridGeometry, gridMaterial);
-
-gridPlane1b.rotation.x = -Math.PI * 0.5;
-gridPlane1b.position.x = 0;
-gridPlane1b.position.y = 0.0;
-gridPlane1b.position.z = -1.85;
-
-scene.add(gridPlane1b);
-
-// const gridPlane2a = new THREE.Mesh(gridGeometry, gridMaterial);
-
-// gridPlane2a.rotation.x = -Math.PI * 0.5;
-// gridPlane2a.rotation.z = Math.PI;
-// gridPlane2a.position.x = 1.0;
-// gridPlane2a.position.y = 0.0;
-// gridPlane2a.position.z = 0.15;
-
-// scene.add(gridPlane2a);
-
-// const gridPlane2b = new THREE.Mesh(gridGeometry, gridMaterial);
-
-// gridPlane2b.rotation.x = -Math.PI * 0.5;
-// gridPlane2b.rotation.z = Math.PI;
-// gridPlane2b.position.x = 1.0;
-// gridPlane2b.position.y = 0.0;
-// gridPlane2b.position.z = -1.85;
-
-// scene.add(gridPlane2b);
+gridPlane2.rotation.x = -Math.PI * 0.5;
+gridPlane2.position.y = 0.0;
+gridPlane2.position.z = -1.85;
+scene.add(gridPlane);
+scene.add(gridPlane2);
 
 calcScale();
+
+const SUN_TEXTURE_PATH = "../assets/textures/sunTexture.png";
+const SUN_METAL_PATH = "../assets/textures/sunMetalTexture.png";
+const SUN_ROUGHNESS_PATH = "../assets/textures/sunRoughnessTexture1.png";
+
+const sunGridTexture = textureLoader.load(SUN_TEXTURE_PATH);
+const sunMetalTexture = textureLoader.load(SUN_METAL_PATH);
+const sunRoughnessTexture = textureLoader.load(SUN_ROUGHNESS_PATH);
+
+const sunGeometry = new THREE.CircleGeometry(0.35, 60);
+const sunMaterial = new THREE.MeshStandardMaterial({
+  map: sunGridTexture,
+  roughnessMap: sunRoughnessTexture,
+  roughness: 0,
+});
+
+const sunPlane = new THREE.Mesh(sunGeometry, sunMaterial);
+
+sunPlane.position.x = 0;
+sunPlane.position.y = 1.2;
+sunPlane.position.z = -0.75;
+
+scene.add(sunPlane);
 
 // Lights
 const ambientLight = new THREE.AmbientLight(alColor, alIntensity);
@@ -160,12 +157,8 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 camera.position.x = 0;
-camera.position.y = terrainIntensity - 0.1;
+camera.position.y = 0.06;
 camera.position.z = 1;
-
-camera.rotation.x = -Math.PI / 10;
-camera.rotation.y = 0;
-camera.rotation.z = 0;
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
@@ -211,10 +204,16 @@ const tick = () => {
   if (renderScene) {
     const elapsedTime = clock.getElapsedTime();
 
-    gridPlane1a.position.z = (elapsedTime * speed) % 2;
-    gridPlane1b.position.z = ((elapsedTime * speed) % 2) - 2;
-    // gridPlane2a.position.z = (elapsedTime * speed) % 2;
-    // gridPlane2b.position.z = ((elapsedTime * speed) % 2) - 2;
+    camera.position.x = camMovScale.x * mouse.x;
+    camera.rotation.y = camMovScale.x * mouse.x;
+    camera.position.y = camMovScale.y * mouse.y + 0.11;
+    camera.rotation.x = -camMovScale.y * mouse.y;
+
+    sunPlane.position.x = 0.95 * camMovScale.x * mouse.x;
+    sunPlane.position.y = 0.95 * camMovScale.y * mouse.y + 1.2;
+
+    gridPlane.position.z = (elapsedTime * speed) % 2;
+    gridPlane2.position.z = ((elapsedTime * speed) % 2) - 2;
 
     effectComposer.render();
     window.requestAnimationFrame(tick);
@@ -226,29 +225,24 @@ function calcScale() {
   if (size.width > 1000) {
     camMovScale.x = 0.1;
     camMovScale.y = 0.1;
-    gridPlane1a.scale.x = 1;
-    gridPlane1b.scale.x = 1;
-    // gridPlane2a.scale.x = 1;
-    // gridPlane2b.scale.x = 1;
+    gridPlane.scale.x = 1;
+    gridPlane2.scale.x = 1;
     terrainIntensity = 0.5;
   } else if (size.width < 400) {
     camMovScale.x = 0.05;
     camMovScale.y = 0.05;
-    gridPlane1a.scale.x = 0.25;
-    gridPlane1b.scale.x = 0.25;
-    // gridPlane2a.scale.x = 0.25;
-    // gridPlane2b.scale.x = 0.25;
+    gridPlane.scale.x = 0.25;
+    gridPlane2.scale.x = 0.25;
     terrainIntensity = 0.8;
   } else {
     // Gradient: val = start_val*x + end_val*(x-1)
     camMovScale.x = 0.1 * (size.width / 1000) + 0.05 * (size.width / 1000 - 1);
     camMovScale.y = 0.1 * (size.width / 1000) + 0.05 * (size.width / 1000 - 1);
-    gridPlane1a.scale.x = size.width / 1000 + 0.25 * (size.width / 1000 - 1);
-    gridPlane1b.scale.x = size.width / 1000 + 0.25 * (size.width / 1000 - 1);
-    // gridPlane2a.scale.x = size.width / 1000 + 0.25 * (size.width / 1000 - 1);
-    // gridPlane2b.scale.x = size.width / 1000 + 0.25 * (size.width / 1000 - 1);
+    gridPlane.scale.x = size.width / 1000 + 0.25 * (size.width / 1000 - 1);
+    gridPlane2.scale.x = size.width / 1000 + 0.25 * (size.width / 1000 - 1);
     terrainIntensity =
       0.5 * (size.width / 1000) - 0.8 * (size.width / 1000 - 1);
+    gridPlane.material.map = gridTexture;
   }
 
   if (size.height > 1000) {
@@ -274,12 +268,17 @@ window.onload = function () {
   let animation = gui.add(guiValues, "animation");
   animation.onChange(function (value) {
     camera.position.x = 0;
-    camera.position.y = terrainIntensity - 0.1;
+    camera.position.y = 0.1;
     camera.position.z = 1;
-
-    camera.rotation.x = -Math.PI / 10;
+    camera.rotation.x = 0;
     camera.rotation.y = 0;
     camera.rotation.z = 0;
+    sunPlane.position.x = 0;
+    sunPlane.position.y = 1.2;
+    sunPlane.position.z = -0.75;
+    sunPlane.rotation.x = 0;
+    sunPlane.rotation.y = 0;
+    sunPlane.rotation.z = 0;
     effectComposer.render();
     if (value) {
       renderScene = true;

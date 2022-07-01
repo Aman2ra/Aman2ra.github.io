@@ -13,7 +13,7 @@ navLinks.forEach((link) => {
 
 const mainPage = document.getElementById("main-page-link");
 mainPage.addEventListener("click", function () {
-  location.href = "../index.html";
+  location.href = "./index.html";
 });
 
 const allProjects = document.getElementById("nav-all-projects");

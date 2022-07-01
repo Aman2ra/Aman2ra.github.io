@@ -38,15 +38,13 @@ $(document).ready(function () {
             }
           }
           $(".names-track").append(
-            '<li class="slide-name"><h3>' + val.slice(start, end) + "</h3></li>"
+            `<li class="slide-name"><h3>${val.slice(start, end)}</h3></li>`
           );
           $(".carousel-track").append(
-            ' <li class="carousel-slide current-slide"><img class="carousel-image" src="' +
-              file.download_url +
-              '" alt=""/></li>'
+            `<li class="carousel-slide current-slide"><img class="carousel-image" src="${file.download_url}" alt=""/></li>`
           );
           $(".carousel-nav").append(
-            '<button class="carousel-indicator"></button>'
+            `<button class="carousel-indicator"></button>`
           );
         }
       }

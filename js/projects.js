@@ -1,4 +1,4 @@
-let imagesFolder = "../assets/images/Projects/";
+const imagesFolder = "../assets/images/projects/";
 const projects = [
   {
     "project-name": "Rubiks Cube Solver",
@@ -28,7 +28,7 @@ const projects = [
     "project-progress": "Theorized",
     "project-progress-tag": "theory",
     "project-img-main": "ten-facts-about-zero-two.png",
-    "project-img-folder": "../Highlighted Projects/",
+    "project-img-folder": "../highlighted-projects/",
     "project-desc-long": "Beautiful",
     "project-tags": "[I LOST,...]",
   },
@@ -38,7 +38,7 @@ const projects = [
     "project-progress": "Work in Progress",
     "project-progress-tag": "wip",
     "project-img-main": "Slide1.png",
-    "project-img-folder": "../Highlighted Projects/",
+    "project-img-folder": "../highlighted-projects/",
     "project-desc-long": "TEST DESC LONG",
     "project-tags": "[TEST1, TEST2, TEST3 TEST4,...]",
   },
@@ -46,7 +46,7 @@ const projects = [
     "project-name": "TESTING",
     "project-description": "TEST DESC",
     "project-img-main": "Slide1.png",
-    "project-img-folder": "../Highlighted Projects/",
+    "project-img-folder": "../highlighted-projects/",
     "project-desc-long": "TEST DESC LONG",
     "project-tags": "[TEST1, TEST2, TEST3 TEST4,...]",
   },
@@ -54,7 +54,7 @@ const projects = [
     "project-name": "TESTING",
     "project-description": "TEST DESC",
     "project-img-main": "Slide1.png",
-    "project-img-folder": "../Highlighted Projects/",
+    "project-img-folder": "../highlighted-projects/",
     "project-desc-long": "TEST DESC LONG",
     "project-tags": "[TEST1, TEST2, TEST3 TEST4,...]",
   },
@@ -230,39 +230,49 @@ for (let project = 0; project < projects.length; project++) {
 }
 
 const loadCarouselImages = function (carousel, path) {
+  const user = "Dino-Jesus";
+  const repo = "Dino-Jesus.github.io";
+  const imgUrl =
+    "https://api.github.com/repos/" + user + "/" + repo + "/contents/" + path;
+  console.log(imgUrl);
   $(document).ready(function () {
     $.ajax({
-      url: path,
+      url: imgUrl,
       success: function (data) {
-        $(data)
-          .find("a")
-          .attr("href", function (i, val) {
-            if (val.match(/\.(jpe?g|png|gif)$/)) {
-              let start, end;
-              for (let i = val.length - 1; i >= 0; i--) {
-                if (!end && val[i] == ".") {
-                  end = i;
-                } else if (!start && val[i] == "/") {
-                  start = i + 1;
-                } else if (start && end) {
-                  break;
-                }
+        console.log(data);
+        for (let file of data) {
+          console.log(
+            `file path: ${file.path} \nfile name: ${
+              file.name
+            } \nfile is img? ${file.name.match(
+              /\.(jpe?g|png|gif)$/
+            )} \nfile dw url: ${file.download_url}`
+          );
+          let val = file.name;
+          if (val.match(/\.(jpe?g|png|gif)$/)) {
+            let start, end;
+            for (let i = val.length - 1; i >= 0; i--) {
+              if (!end && val[i] == ".") {
+                end = i;
+              } else if (!start && val[i] == "/") {
+                start = i + 1;
+              } else if (!start && i == 0) {
+                start = i;
+              } else if (start && end) {
+                break;
               }
-              $(carousel.querySelector(".names-track")).append(
-                '<li class="slide-name"><h3>' +
-                  val.slice(start, end).replace("%20", " ") +
-                  "</h3></li>"
-              );
-              $(carousel.querySelector(".carousel-track")).append(
-                ' <li class="carousel-slide current-slide"><img class="carousel-image" src="' +
-                  val +
-                  '" alt=""/></li>'
-              );
-              $(carousel.querySelector(".carousel-nav")).append(
-                '<button class="carousel-indicator"></button>'
-              );
             }
-          });
+            $(carousel.querySelector(".names-track")).append(
+              `<li class="slide-name"><h3>${val.slice(start, end)}</h3></li>`
+            );
+            $(carousel.querySelector(".carousel-track")).append(
+              `<li class="carousel-slide current-slide"><img class="carousel-image" src="${file.download_url}" alt=""/></li>`
+            );
+            $(carousel.querySelector(".carousel-nav")).append(
+              `<button class="carousel-indicator"></button>`
+            );
+          }
+        }
         refreshCarousel(carousel);
       },
     });
@@ -299,7 +309,7 @@ const getAbsoluteHeight = function (el) {
 };
 
 const update_elevator = function (num) {
-  const font_path = "../assets/images/General/Font/";
+  const font_path = "../assets/images/general/font/";
   const counter_digits = document.querySelectorAll(".digit");
   let digits = num.toString().split("");
   for (let i = 0; i < digits.length && i < counter_digits.length; i++) {
