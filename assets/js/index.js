@@ -1,14 +1,20 @@
+var loc = window.location.pathname;
+var dir = loc.substring(0, loc.lastIndexOf("/"));
+console.log(loc);
+console.log(dir);
+
 const projectsToggle = document.getElementById("projects-slider-toggle");
 
 projectsToggle.addEventListener("click", function () {
   document.body.classList.toggle("projects-slide-open");
 });
 
-document.querySelector(".imone").src = "../assets/images/General/Logo.png";
-
 const carouselTrack = document.querySelector(".carousel-track");
 let imgDir = "../assets/images/General/";
 $(document).ready(function () {
+  document.querySelector(".imtwo").src = "../assets/images/General/Logo.png";
+  document.querySelector(".imone").src =
+    "../assets/images/Highlighted Projects/Slide1.png";
   $.ajax({
     url: imgDir,
     success: function (data) {
