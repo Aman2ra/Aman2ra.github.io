@@ -1,4 +1,4 @@
-const imagesFolder = "../assets/images/projects/";
+const imagesFolder = "/assets/images/projects/";
 const projects = [
   {
     "project-name": "Rubiks Cube Solver",
