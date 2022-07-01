@@ -7,7 +7,7 @@ projectsToggle.addEventListener("click", function () {
 const carouselTrack = document.querySelector(".carousel-track");
 const user = "Dino-Jesus";
 const repo = "Dino-Jesus.github.io";
-const imgDir = "assets/images/Highlighted Projects/";
+const imgDir = "assets/images/highlighted-projects/";
 const imgUrl =
   "https://api.github.com/repos/" + user + "/" + repo + "/contents/" + imgDir;
 $(document).ready(function () {
