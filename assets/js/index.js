@@ -14,7 +14,7 @@ let imgDir = "../assets/images/General/";
 $(document).ready(function () {
   document.querySelector(".imtwo").src = "../assets/images/General/Logo.png";
   document.querySelector(".imone").src =
-    "../assets/images/Highlighted Projects/Slide1.png";
+    "../assets/images/Highlighted Projects/Slide1.PNG";
   $.ajax({
     url: imgDir,
     success: function (data) {
