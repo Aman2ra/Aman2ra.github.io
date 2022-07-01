@@ -302,7 +302,8 @@ body {
   width: 150px;
   height: 100%;
   background: black;
-  background: url(../assets/images/General/Elevator\ Panel\ Texture.png) repeat fixed center;
+  background: url(../assets/images/general/Elevator\ Panel\ Texture.png) repeat fixed center;
+  S
 }
 
 .left-panel {
