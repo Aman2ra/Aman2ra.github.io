@@ -148,8 +148,8 @@ const loadCarouselImages = function (carousel, path) {
 $.ajax({
   url: fileUrl,
   success: function (data) {
-    // $.getJSON(data.download_url, function (json) {
-    $.getJSON("/assets/files/projects.json", function (json) {
+    $.getJSON(data.download_url, function (json) {
+      // $.getJSON("/assets/files/projects.json", function (json) {
       projects = json;
       popouts.style.zIndex = projects.length + 1;
       for (let project = 0; project < projects.length; project++) {
