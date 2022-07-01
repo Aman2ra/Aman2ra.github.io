@@ -55,7 +55,7 @@ $(document).ready(function () {
       alert("Error: " + errorThrown);
     },
   });
-  imgDir = "../assets/images/General";
+  imgDir = "../assets/images/textures/";
   $.ajax({
     url: imgDir,
     success: function (data) {
