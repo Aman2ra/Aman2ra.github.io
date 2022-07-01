@@ -1,0 +1,58 @@
+[
+  {
+    "project-name": "Rubiks Cube Solver",
+    "project-description": "A Java application that allows the user to play with a virtual rubiks cube, with a built in solver that solves the cube and outputs the algorithms used.",
+    "project-progress": "Complete",
+    "project-progress-tag": "complete",
+    "project-img-main": "Cube.png",
+    "project-img-folder": "Cube/",
+    "project-desc-long": "Long Cube Desc",
+    "project-tags": "[Java, Gui, ...]"
+  },
+  {
+    "project-name": "Spotify Lights",
+    "project-description": "Makes your arduino controlled rgb strip the same color as your current spotify album",
+    "project-progress": "Complete",
+    "project-progress-tag": "complete",
+    "project-img-main": "Spotify.png",
+    "project-img-folder": "Spotify/",
+    "project-desc-long": "Long Spotify Desc",
+    "project-tags": "[Python, Arduino, Spotify API,...]"
+  },
+  {
+    "project-name": "Waifu",
+    "project-description": "My Waifu",
+    "project-progress": "Theorized",
+    "project-progress-tag": "theory",
+    "project-img-main": "ten-facts-about-zero-two.png",
+    "project-img-folder": "../Highlighted Projects/",
+    "project-desc-long": "Beautiful",
+    "project-tags": "[I LOST,...]"
+  },
+  {
+    "project-name": "TESTING",
+    "project-description": "TEST DESC",
+    "project-progress": "Work in Progress",
+    "project-progress-tag": "wip",
+    "project-img-main": "Slide1.png",
+    "project-img-folder": "../Highlighted Projects/",
+    "project-desc-long": "TEST DESC LONG",
+    "project-tags": "[TEST1, TEST2, TEST3 TEST4,...]"
+  },
+  {
+    "project-name": "TESTING",
+    "project-description": "TEST DESC",
+    "project-img-main": "Slide1.png",
+    "project-img-folder": "../Highlighted Projects/",
+    "project-desc-long": "TEST DESC LONG",
+    "project-tags": "[TEST1, TEST2, TEST3 TEST4,...]"
+  },
+  {
+    "project-name": "TESTING",
+    "project-description": "TEST DESC",
+    "project-img-main": "Slide1.png",
+    "project-img-folder": "../Highlighted Projects/",
+    "project-desc-long": "TEST DESC LONG",
+    "project-tags": "[TEST1, TEST2, TEST3 TEST4,...]"
+  }
+]
