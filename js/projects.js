@@ -115,7 +115,7 @@ const loadCarouselImages = function (carousel, path) {
           //   )} \nfile dw url: ${file.download_url}`
           // );
           let val = file.name;
-          if (val.match(/\.(jpe?g|png|gif)$/)) {
+          if (val.match(/\.(jpe?g|png|gif|mp4)$/)) {
             let start, end;
             for (let i = val.length - 1; i >= 0; i--) {
               if (!end && val[i] == ".") {
