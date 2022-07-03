@@ -60,6 +60,10 @@ const createCarousel = function (carousel) {
   };
   const moveToSlide = (slides_track, currentSlide, targetSlide) => {
     // move to next slide
+    let video = currentSlide.querySelector("video");
+    if (video) {
+      video.pause();
+    }
     slides_track.style.transform =
       "translateX(-" + targetSlide.style.left + ")";
     currentSlide.classList.remove("current-slide");
@@ -157,6 +161,12 @@ const createCarousel = function (carousel) {
     current_carousel
       .querySelector(".carousel-background")
       .classList.toggle("carousel-background-active");
+
+    if (expand_button.textContent == "< >") {
+      expand_button.textContent = "> <";
+    } else if (expand_button.textContent == "> <") {
+      expand_button.textContent = "< >";
+    }
   });
 };
 

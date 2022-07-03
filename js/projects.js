@@ -1,9 +1,17 @@
+let loadLocal = false;
+
 const imagesFolder = "/assets/images/projects/";
 const user = "Dino-Jesus";
 const repo = "Dino-Jesus.github.io";
 const filesDir = "assets/files/projects.json";
-const fileUrl =
-  "https://api.github.com/repos/" + user + "/" + repo + "/contents/" + filesDir;
+const fileUrl = loadLocal
+  ? "../" + filesDir
+  : "https://api.github.com/repos/" +
+    user +
+    "/" +
+    repo +
+    "/contents/" +
+    filesDir;
 let projects = [];
 
 const listPageTemplate = document.getElementById("project-template").content;
@@ -98,45 +106,66 @@ let read_more = function (project) {
 };
 
 const loadCarouselImages = function (carousel, path) {
-  const imgUrl =
-    "https://api.github.com/repos/" + user + "/" + repo + "/contents/" + path;
-  // console.log(imgUrl);
+  const imgUrl = loadLocal
+    ? ".." + path
+    : "https://api.github.com/repos/" + user + "/" + repo + "/contents/" + path;
+  console.log(imgUrl);
   $(document).ready(function () {
     $.ajax({
       url: imgUrl,
       success: function (data) {
-        // console.log(data);
-        for (let file of data) {
-          // console.log(
-          //   `file path: ${file.path} \nfile name: ${
-          //     file.name
-          //   } \nfile is img? ${file.name.match(
-          //     /\.(jpe?g|png|gif)$/
-          //   )} \nfile dw url: ${file.download_url}`
-          // );
-          let val = file.name;
-          if (val.match(/\.(jpe?g|png|gif|mp4)$/)) {
-            let start, end;
-            for (let i = val.length - 1; i >= 0; i--) {
-              if (!end && val[i] == ".") {
-                end = i;
-              } else if (!start && val[i] == "/") {
-                start = i + 1;
-              } else if (!start && i == 0) {
-                start = i;
-              } else if (start && end) {
-                break;
-              }
+        const loadData = function (name, src) {
+          let start, end;
+          for (let i = name.length - 1; i >= 0; i--) {
+            if (!end && name[i] == ".") {
+              end = i;
+            } else if (!start && name[i] == "/") {
+              start = i + 1;
+            } else if (!start && i == 0) {
+              start = i;
+            } else if (start && end) {
+              break;
             }
-            $(carousel.querySelector(".names-track")).append(
-              `<li class="slide-name"><h3>${val.slice(start, end)}</h3></li>`
-            );
+          }
+          $(carousel.querySelector(".names-track")).append(
+            `<li class="slide-name"><h3>${name.slice(start, end)}</h3></li>`
+          );
+          if (name.match(/\.(jpe?g|png|gif)$/)) {
             $(carousel.querySelector(".carousel-track")).append(
-              `<li class="carousel-slide current-slide"><img class="carousel-image" src="${file.download_url}" alt=""/></li>`
+              `<li class="carousel-slide current-slide"><img class="carousel-image" src="${src}" alt=""/></li>`
             );
-            $(carousel.querySelector(".carousel-nav")).append(
-              `<button class="carousel-indicator"></button>`
-            );
+          } else {
+            $(carousel.querySelector(".carousel-track"))
+              .append(`<li class="carousel-slide current-slide"> <video class="carousel-image" controls>
+          <source src="${src}" type="video/mp4">
+          Your browser does not support the video tag.
+          </video> </li>`);
+          }
+          $(carousel.querySelector(".carousel-nav")).append(
+            `<button class="carousel-indicator"></button>`
+          );
+        };
+        // console.log(data);
+        if (loadLocal) {
+          $(data)
+            .find("a")
+            .attr("href", function (i, val) {
+              if (val.match(/\.(jpe?g|png|gif|mp4)$/)) {
+                loadData(val, val);
+              }
+            });
+        } else {
+          for (let file of data) {
+            // console.log(
+            //   `file path: ${file.path} \nfile name: ${
+            //     file.name
+            //   } \nfile is img? ${file.name.match(
+            //     /\.(jpe?g|png|gif)$/
+            //   )} \nfile dw url: ${file.download_url}`
+            // );
+            if (file.name.match(/\.(jpe?g|png|gif|mp4)$/)) {
+              loadData(file.name, file.download_url);
+            }
           }
         }
         refreshCarousel(carousel);
