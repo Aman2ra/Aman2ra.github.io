@@ -29,7 +29,10 @@ $(document).ready(function () {
           for (let i = val.length - 1; i >= 0; i--) {
             if (!end && val[i] == ".") {
               end = i;
-            } else if (!start && val[i] == "/") {
+            } else if (
+              !start &&
+              (val[i] == "/" || (val[i] == "." && !isNaN(parseInt(val[i - 1]))))
+            ) {
               start = i + 1;
             } else if (!start && i == 0) {
               start = i;

@@ -119,7 +119,11 @@ const loadCarouselImages = function (carousel, path) {
           for (let i = name.length - 1; i >= 0; i--) {
             if (!end && name[i] == ".") {
               end = i;
-            } else if (!start && name[i] == "/") {
+            } else if (
+              !start &&
+              (name[i] == "/" ||
+                (name[i] == "." && !isNaN(parseInt(name[i - 1]))))
+            ) {
               start = i + 1;
             } else if (!start && i == 0) {
               start = i;
