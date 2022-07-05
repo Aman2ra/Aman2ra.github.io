@@ -370,7 +370,11 @@ body {
 
 @media screen and (max-width: 1019px) {
   :root {
-    --perp-t: 12vw;
+    --perp-v: 4vw;
+    --perp-ry: 3deg;
+    --perp-rz: -4deg;
+    --perp-t: 10vw;
+    --perp-s: 110%;
   }
 
   .project,
@@ -394,6 +398,7 @@ body {
   .odd-name,
   .odd-description,
   .odd-read-more {
+    position: relative;
     top: initial;
     bottom: initial;
     left: initial;
@@ -403,42 +408,25 @@ body {
   }
 
   .project {
-    position: relative;
     margin: 30px 0;
     border: solid var(--bo-project) black;
-    width: 100%;
-    height: initial;
+    transition: transform 250ms linear;
   }
 
-  .project-img-container {
-    position: relative;
-    background: transparent;
-    /* border: solid var(--bo-img) red; */
-    width: 100%;
-    max-height: 100%;
+  .project:hover {
+    z-index: 1;
+    transform: perspective(none);
   }
 
-  .project-img {
-    object-fit: contain;
-    max-height: var(--project-height);
-    max-width: 100%;
+  .even-project {
+    transform: perspective(var(--perp-v)) rotateY(var(--perp-ry)) rotateZ(var(--perp-rz)) translateX(var(--perp-t)) scaleX(var(--perp-s));
   }
 
-  .even-img {
-    margin-left: 0;
-    margin-right: auto;
-    transition: transform 250ms linear, margin 250ms linear;
-  }
-
-  .odd-img {
-    margin-left: auto;
-    margin-right: 0;
-    transition: transform 250ms linear, margin 250ms linear;
+  .odd-project {
+    transform: perspective(var(--perp-v)) rotateY(calc(-1 * var(--perp-ry))) rotateZ(calc(-1 * var(--perp-rz))) translateX(calc(-1 * var(--perp-t))) scaleX(var(--perp-s));
   }
 
   .project-info-container {
-    position: relative;
-    /* border: solid var(--bo-info) blue; */
     margin-top: 10px;
   }
 
@@ -454,7 +442,6 @@ body {
   }
 
   .read-more {
-    position: relative;
     font-size: 1.25rem;
     font-style: italic;
   }
@@ -473,42 +460,38 @@ body {
     text-align: right;
   }
 
-  :root {
-    --perp-v: 4vw;
-    --perp-ry: 3deg;
-    --perp-rz: -4deg;
-    --perp-t: 10vw;
-    --perp-s: 110%;
+  .project-img-container {
+    width: 100%;
+    height: var(--project-height);
+    max-height: 100%;
   }
 
-  .even-project {
-    transform: perspective(var(--perp-v)) rotateY(var(--perp-ry)) rotateZ(var(--perp-rz)) translateX(var(--perp-t)) scaleX(var(--perp-s));
+  .project-img {
+    object-fit: contain;
+    max-height: var(--project-height);
+    max-width: 100%;
   }
 
-  .odd-project {
-    transform: perspective(var(--perp-v)) rotateY(calc(-1 * var(--perp-ry))) rotateZ(calc(-1 * var(--perp-rz))) translateX(calc(-1 * var(--perp-t))) scaleX(var(--perp-s));
+  .even-img {
+    position: absolute;
+    left: 0;
+    transition: transform 250ms linear, left 250ms linear;
   }
 
-  .project {
-    transition: transform 250ms linear;
-  }
-
-  .project:hover {
-    z-index: 1;
-    transform: perspective(none);
+  .odd-img {
+    position: absolute;
+    right: 0;
+    transition: transform 250ms linear, right 250ms linear;
   }
 
   .project:hover>.even-img-container>.even-img {
-    margin-left: 50%;
-    margin-right: auto;
+    left: 50%;
     transform: translateX(-50%);
-    transition: transform 250ms linear, margin 250ms linear;
   }
 
   .project:hover>.odd-img-container>.odd-img {
-    margin-left: 50%;
-    transform: translateX(-50%);
-    transition: transform 250ms linear, margin 250ms linear;
+    right: 50%;
+    transform: translateX(50%);
   }
 }
 
