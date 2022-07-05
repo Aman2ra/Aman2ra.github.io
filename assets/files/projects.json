@@ -4,8 +4,8 @@
     "project-description": "A virtual Rubik’s cube made with Java and Swing the user can play with, program also solves the Rubik’s cube and outputs the algorithm.",
     "project-progress": "Complete",
     "project-progress-tag": "complete",
-    "project-img-main": "1.Cube.png",
-    "project-img-folder": "cube/",
+    "project-img-main": "1.Rubiks-Cube-Solver.png",
+    "project-img-folder": "RubiksCubeSolver/",
     "project-desc-long": "A java program where the user can play around with a virtual rubik's cube. Comes with a solver that solves the scrambled Rubik's cube based on the 'beginner method' and outputs the algorithms it used to solve it. In the future, I plan to implement a way for the user to define the base scrambled cube (for example the user shows their Rubik's cube in a camera, the program reads it and solves it. This way the user can solve their own Rubik's cube.",
     "project-tags": "[Java, Java_Swing]"
   },
@@ -14,8 +14,8 @@
     "project-description": "Python program connects to Spotify and an Arduino to change the colour of a led strip. Colour set is the dominant colour in the album art of the track the user is listening to on Spotify.",
     "project-progress": "Complete",
     "project-progress-tag": "complete",
-    "project-img-main": "1.Spotify.png",
-    "project-img-folder": "spotify/",
+    "project-img-main": "1.Spotify-Lights.png",
+    "project-img-folder": "SpotifyLights/",
     "project-desc-long": "Sets the lighting in your room to match the album art of any song. Python program that connects to the spotify api and an arduino to control RGB lights that the user can put anywhere. Makes for nice decoration and lighting when youre jamming to your favourite songs.",
     "project-tags": "[Python, Arduino, Spotify API]"
   },
@@ -24,8 +24,8 @@
     "project-description": "Building a chrome extention that can be used by general public to use my Spotify Lights project",
     "project-progress": "Work in Progress",
     "project-progress-tag": "wip",
-    "project-img-main": "",
-    "project-img-folder": "",
+    "project-img-main": "1.Spotify-Lights-Extension.png",
+    "project-img-folder": "SpotifyLightsExtension/",
     "project-desc-long": "Sets the lighting in your room to match the album art of any song. Python program that connects to the spotify api and an arduino to control RGB lights that the user can put anywhere. Makes for nice decoration and lighting when youre jamming to your favourite songs. \nThe extension version of the spotify lights project will allow any user to connect their spotify account and arduino locally to enjoy the lights.",
     "project-tags": "[HTML, JavaScript, Python, Arduino, Spotify API]"
   },
@@ -34,8 +34,8 @@
     "project-description": "A program that will be able to identify the notes played in a music track and output them so the user can play it.",
     "project-progress": "Theorized",
     "project-progress-tag": "theory",
-    "project-img-main": "",
-    "project-img-folder": "",
+    "project-img-main": "1.Music-Notes-Identifier.png",
+    "project-img-folder": "MusicNotesIdentifier/",
     "project-desc-long": "Ever heard a song you wanter to learn to play on the piano but couldn't find the notes anywhere? This project will analyze a song and provide the notes breakdown so you can now play it. With the use of Fourier transforms, one should be able to break down a music signal into the notes it uses at any given time. This is what my progam will be based on. For starting purposes, I'd like the program to give just the notes similar to synthasia videos on youtube with the hope that it can generate full sheet music in the future.",
     "project-tags": "[Java]"
   }
