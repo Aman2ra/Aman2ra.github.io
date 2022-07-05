@@ -59,9 +59,8 @@ h3 {
 #main-page {
   /* border: solid 5px red; */
   width: 100%;
+  max-width: 100%;
   background: transparent;
-  overflow-y: initial;
-
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);
@@ -74,6 +73,10 @@ h3 {
   display: flex;
   justify-content: center;
   background: transparent;
+}
+
+#name {
+  max-width: 100%
 }
 
 /* Links */
@@ -310,20 +313,13 @@ h3 {
 /* Glowing button */
 .neon {
   position: relative;
-  /* top: 25%; */
-  /* left: 50%; */
-
-  /* transform: translateX(-50%); */
-
   color: var(--clr-neon-a);
   text-decoration: none;
   border: solid 0.125em var(--clr-neon-a);
   border-radius: 0.25em;
-  padding: 0.25em 1.25em;
-
+  padding: 0.25em 0.5em;
   text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.15),
     0 0 0.25em var(--clr-neon-a);
-
   box-shadow: inset 0 0 0.5em 0 var(--clr-neon-a), 0 0 0.5em 0 var(--clr-neon-a);
 
   transition: background 1000ms linear, color 1000ms linear;
@@ -339,12 +335,10 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-
-  transform: perspective(0.06em) rotateX(3.4deg) scale(0.5, 0.5);
+  transform: perspective(0.06em) rotateX(3.4deg) scale(0.5, 0.35);
   filter: blur(1.5em);
   opacity: 0.5;
   transition: opacity 500ms linear, transform 500ms linear;
-  /* z-index: -1; */
 }
 
 .projects-slide-open .neon::before {
