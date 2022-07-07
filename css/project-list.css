@@ -427,7 +427,8 @@ body {
   }
 
   .project-info-container {
-    margin-top: 10px;
+    padding-top: 10px;
+    background-color: #101010;
   }
 
   .project-name,
@@ -435,6 +436,7 @@ body {
   .read-more,
   .project-progress {
     margin: 10px 20px;
+    background-color: transparent;
   }
 
   .project-name {

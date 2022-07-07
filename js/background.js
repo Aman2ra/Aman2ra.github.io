@@ -4,8 +4,11 @@ import { EffectComposer } from "EffectComposer";
 import { GammaCorrectionShader } from "GammaCorrectionShader";
 import { ShaderPass } from "ShaderPass";
 import { RGBShiftShader } from "RGBShiftShader";
+import { Matrix4 } from "three";
 
 let guiValues;
+const textureFolder = "../assets/textures/";
+
 const mouse = new THREE.Vector2();
 const camMovScale = { x: 0.1, y: 0.1, z: 0.1 };
 
@@ -13,34 +16,6 @@ const camMovScale = { x: 0.1, y: 0.1, z: 0.1 };
 let renderScene = true;
 let terrainIntensity = 0.5;
 const matMetalness = 0.9;
-const matRoughness = 0.4;
-
-const alIntensity = 0;
-const alColor = new THREE.Color(255 / 255, 255 / 255, 255 / 255);
-
-const sl1Intensity = 40;
-const sl1Dist = 20;
-const sl1Angle = Math.PI * 0.1;
-const sl1Pen = 0.3;
-const sl1Color = new THREE.Color(255 / 255, 0 / 255, 169 / 255);
-const sl1X = 0;
-const sl1Y = 2;
-const sl1Z = 2;
-const slt1X = 0;
-const slt1Y = 1;
-const slt1Z = 1;
-
-const sl2Intensity = 40;
-const sl2Dist = 20;
-const sl2Angle = Math.PI * 0.1;
-const sl2Pen = 0.25;
-const sl2Color = new THREE.Color(255 / 255, 255 / 255, 255 / 255);
-const sl2X = 0;
-const sl2Y = -2;
-const sl2Z = 0;
-const slt2X = 0;
-const slt2Y = 0;
-const slt2Z = 0;
 
 const camNear = 0.01;
 const camFar = 20;
@@ -58,12 +33,12 @@ const size = {
   height: window.innerHeight,
 };
 
-const fog = new THREE.Fog("#000000", 1, 2.5);
+const fog = new THREE.Fog("#000000", 1, 2.1);
 scene.fog = fog;
 
-const TEXTURE_PATH = "../assets/textures/gridTexture2.png";
-const DISPLACEMENT_PATH = "../assets/textures/heightTexture2.png";
-const METAL_PATH = "../assets/textures/metalTexture2.png";
+const TEXTURE_PATH = textureFolder + "gridTexture2.png";
+const DISPLACEMENT_PATH = textureFolder + "heightTexture2.png";
+const METAL_PATH = textureFolder + "metalTexture2.png";
 
 const textureLoader = new THREE.TextureLoader();
 const gridTexture = textureLoader.load(TEXTURE_PATH);
@@ -77,10 +52,10 @@ const gridMaterial = new THREE.MeshStandardMaterial({
   displacementScale: terrainIntensity,
   metalnessMap: gridMetalTexture,
   metalness: matMetalness,
-  roughness: matRoughness,
+  emissive: new THREE.Color(255 / 255, 0 / 255, 169 / 255),
+  emissiveMap: gridTexture,
+  emissiveIntensity: 20,
 });
-
-// GRID TEXTURE vs GRID OBJECT
 
 const gridPlane = new THREE.Mesh(gridGeometry, gridMaterial);
 
@@ -93,61 +68,56 @@ const gridPlane2 = new THREE.Mesh(gridGeometry, gridMaterial);
 gridPlane2.rotation.x = -Math.PI * 0.5;
 gridPlane2.position.y = 0.0;
 gridPlane2.position.z = -1.85;
+
 scene.add(gridPlane);
 scene.add(gridPlane2);
 
 calcScale();
 
-const SUN_TEXTURE_PATH = "../assets/textures/sunTexture.png";
-const SUN_METAL_PATH = "../assets/textures/sunMetalTexture.png";
-const SUN_ROUGHNESS_PATH = "../assets/textures/sunRoughnessTexture1.png";
+const SUN_TEXTURE_PATH = textureFolder + "sunTexture.png";
 
 const sunGridTexture = textureLoader.load(SUN_TEXTURE_PATH);
-const sunMetalTexture = textureLoader.load(SUN_METAL_PATH);
-const sunRoughnessTexture = textureLoader.load(SUN_ROUGHNESS_PATH);
 
 const sunGeometry = new THREE.CircleGeometry(0.35, 60);
 const sunMaterial = new THREE.MeshStandardMaterial({
   map: sunGridTexture,
-  roughnessMap: sunRoughnessTexture,
-  roughness: 0,
+  emissive: new THREE.Color(1, 1, 1),
+  emissiveMap: sunGridTexture,
+  emissiveIntensity: 1,
 });
-
 const sunPlane = new THREE.Mesh(sunGeometry, sunMaterial);
+scene.add(sunPlane);
 
 sunPlane.position.x = 0;
 sunPlane.position.y = 1.2;
 sunPlane.position.z = -0.75;
 
-scene.add(sunPlane);
-
-// Lights
-const ambientLight = new THREE.AmbientLight(alColor, alIntensity);
-scene.add(ambientLight);
-
-const spotlight = new THREE.SpotLight(
-  sl1Color,
-  sl1Intensity,
-  sl1Dist,
-  sl1Angle,
-  sl1Pen
+const sunLinesGeometry = new THREE.PlaneGeometry(2.5 * 0.4, 0.05);
+const sunLinesMaterial = new THREE.MeshLambertMaterial();
+const sunLinesCount = 6;
+const sunLines = new THREE.InstancedMesh(
+  sunLinesGeometry,
+  sunLinesMaterial,
+  sunLinesCount
 );
-spotlight.position.set(sl1X, sl1Y, sl1Z);
-spotlight.target.position.set(slt1X, slt1Y, slt1Z);
-scene.add(spotlight);
-scene.add(spotlight.target);
 
-const spotlight2 = new THREE.SpotLight(
-  sl2Color,
-  sl2Intensity,
-  sl2Dist,
-  sl2Angle,
-  sl2Pen
-);
-spotlight2.position.set(sl2X, sl2Y, sl2Z);
-spotlight2.target.position.set(slt2X, slt2Y, slt2Z);
-scene.add(spotlight2);
-scene.add(spotlight2.target);
+let sunLinesMatrix = new THREE.Matrix4();
+let sunLinesColor = [
+  new THREE.Color(0, 0, 0),
+  new THREE.Color(0, 0, 0),
+  new THREE.Color(0, 0, 0),
+  new THREE.Color(0, 0, 0),
+  new THREE.Color(0, 0, 0),
+  new THREE.Color(0, 0, 0),
+];
+
+for (let i = 0; i < sunLinesCount; i++) {
+  sunLines.setColorAt(i, sunLinesColor[i]);
+  sunLinesMatrix.makeTranslation(0, 1 + i / 10, -0.749);
+  sunLines.setMatrixAt(i, sunLinesMatrix);
+}
+
+scene.add(sunLines);
 
 const camera = new THREE.PerspectiveCamera(
   camFOV, //fov
@@ -200,9 +170,36 @@ effectComposer.addPass(gammaCorrectionPass);
 
 const clock = new THREE.Clock();
 
+let time = 1;
+let oldPosition;
+let dummyMatrix = new Matrix4();
+
 const tick = () => {
   if (renderScene) {
     const elapsedTime = clock.getElapsedTime();
+    for (let index = 0; index < sunLines.count; index++) {
+      let highest = 1.56;
+      let lowest = 0.925;
+      let speedL = time * speed;
+      speedL = elapsedTime * speed * 0.25;
+      let gapBetweenLine = 0.155 * index;
+      let power = 3;
+      let newYPos =
+        highest - Math.pow((speedL + gapBetweenLine) % lowest, power);
+      let newYScale = 3 * Math.pow((speedL + gapBetweenLine) % lowest, 1.5);
+
+      sunLines.getMatrixAt(index, sunLinesMatrix);
+      oldPosition = new THREE.Vector3().setFromMatrixPosition(sunLinesMatrix);
+      sunLinesMatrix.makeTranslation(
+        0.95 * camMovScale.x * mouse.x,
+        newYPos + 0.95 * camMovScale.y * mouse.y,
+        oldPosition.z
+      );
+      dummyMatrix.identity();
+      sunLinesMatrix.multiply(dummyMatrix.makeScale(1, newYScale, 1));
+      sunLines.setMatrixAt(index, sunLinesMatrix);
+    }
+    sunLines.instanceMatrix.needsUpdate = true;
 
     camera.position.x = camMovScale.x * mouse.x;
     camera.rotation.y = camMovScale.x * mouse.x;
