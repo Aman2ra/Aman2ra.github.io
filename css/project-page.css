@@ -106,6 +106,8 @@
 #project-description {
   margin: 10px;
   text-align: left;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 @media screen and (max-width: 900px) {

@@ -1,5 +1,15 @@
 [
   {
+    "project-name": "Line Drawer",
+    "project-description": "The program takes a picture, which is then turned into a black and white line drawing version using edge detection. The program then draws the line version of the picture on a white board using an Arduino controlled robot.",
+    "project-progress": "Complete",
+    "project-progress-tag": "complete",
+    "project-img-main": "1.Line-Drawer.png",
+    "project-img-folder": "LineDrawer/",
+    "project-desc-long": "The line drawer is a project I made to expand my understanding of Python, Arduino, and how they are used together to make and operate a machine. It is a more complicated project than the ones I’ve done before as there are more components, both virtual and physical, as well as different versions of the project I had to make in order to test the various code components. It is still not perfect as I had to use cardboard and wooden skewers as the construction material which brought bugs into the physical version and made the project unstable. \r\n \r\nLink to writeup: github.com/Aman2ra/LineDrawer/blob/1adfb2f7f09274031c31044e08377202df8429cc/Line%20Drawer.pdf",
+    "project-tags": "[Python, Arduino, OpenCV, Pillow, vPython]"
+  },
+  {
     "project-name": "Rubiks Cube Solver",
     "project-description": "A virtual Rubik’s cube made with Java and Swing the user can play with, program also solves the Rubik’s cube and outputs the algorithm.",
     "project-progress": "Complete",

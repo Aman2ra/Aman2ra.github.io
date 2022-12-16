@@ -130,6 +130,7 @@ body {
 .project-description {
   margin: 10px 0px;
   text-shadow: 0 0 1px #101010;
+  word-wrap: break-word;
 }
 
 .read-more {
@@ -301,8 +302,8 @@ body {
   top: 0;
   width: 150px;
   height: 100%;
-  background: black;
-  background: url(../assets/images/general/Elevator\ Panel\ Texture.png) repeat fixed center;
+  /* background: black; */
+  /* background: url(../assets/images/general/Elevator\ Panel\ Texture.png) repeat fixed center; */
 }
 
 .left-panel {
@@ -437,6 +438,7 @@ body {
   .project-progress {
     margin: 10px 20px;
     background-color: transparent;
+    word-wrap: break-word;
   }
 
   .project-name {
